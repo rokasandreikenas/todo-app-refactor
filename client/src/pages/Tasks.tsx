@@ -1,8 +1,8 @@
-import { useState } from "react";
 import styled from "styled-components";
 import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
-import { initialTasks } from "./data";
+import { useCreateTask, useTasks, useUpdateTask } from "../hooks/task";
+import { Task } from "../types/task";
 
 const Total = styled.div`
   padding-top: 1rem;
@@ -19,17 +19,26 @@ const Container = styled.div`
 `;
 
 const Tasks = () => {
-  const [tasks, setTasks] = useState(initialTasks);
+  const { data } = useTasks();
+  const { mutateAsync: createTask } = useCreateTask();
+  const { mutateAsync: updateTask } = useUpdateTask();
+  const tasks = data || [];
 
-  const addTask = (taskName: string) => {
-    const newTask = { title: taskName, done: false };
-    setTasks([...tasks, newTask]);
+  const addTask = async (taskName: string) => {
+    try {
+      const newTask = { title: taskName, done: false };
+      await createTask(newTask);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const completeTask = (index: number) => {
-    setTasks((tasks) =>
-      tasks.map((task, idx) => (idx === index ? { ...task, done: true } : task))
-    );
+  const completeTask = async (task: Task) => {
+    try {
+      await updateTask({ ...task, done: true });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

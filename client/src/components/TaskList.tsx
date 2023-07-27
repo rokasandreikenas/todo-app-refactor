@@ -3,18 +3,18 @@ import TaskItem from "./TaskItem";
 
 interface Props {
   tasks: Task[];
-  onTaskComplete: (index: number) => void;
+  onTaskComplete: (task: Task) => void;
 }
 
 const TaskList = ({ tasks, onTaskComplete }: Props) => {
   return (
     <div>
-      {tasks.map((task, index) => (
+      {tasks.map((task) => (
         <TaskItem
-          key={index}
+          key={task.id}
           title={task.title}
           done={task.done}
-          onClick={() => onTaskComplete(index)}
+          onClick={() => onTaskComplete(task)}
         />
       ))}
     </div>
