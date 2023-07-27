@@ -54,6 +54,10 @@ The following modifications were made to the application:
 
 11. **Coding Standards:** ESLint and Prettier have been added to the project to ensure code consistency and enforce best practices.
 
+12. **Project Restructuring:** The project structure was revised to improve organization, facilitate code maintenance, and align with best practices.
+
+13. **Package Updates:** All packages were updated to their latest versions for security, performance, new features, and compatibility reasons.
+
 # How to Run the Project
 
 This project consists of a client and a server which reside in separate folders. Follow the steps below to run the project locally:
