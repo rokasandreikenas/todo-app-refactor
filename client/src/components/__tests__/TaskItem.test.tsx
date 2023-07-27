@@ -1,10 +1,11 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import TaskItem from "../TaskItem";
+import { mockTasks } from "../../mocks/task";
 
 describe("TaskItem", () => {
   it("should render title correctly", () => {
-    const mockTask = { title: "Test Task", done: false };
+    const mockTask = mockTasks[0];
     render(
       <TaskItem
         title={mockTask.title}
@@ -13,11 +14,11 @@ describe("TaskItem", () => {
       />
     );
 
-    expect(screen.getByText("Test Task")).toBeInTheDocument();
+    expect(screen.getByText("Task 1")).toBeInTheDocument();
   });
 
   it("should call onClick when active task is clicked", () => {
-    const mockTask = { title: "Test Task", done: false };
+    const mockTask = mockTasks[0];
     const mockOnClick = jest.fn();
 
     render(
@@ -28,7 +29,7 @@ describe("TaskItem", () => {
       />
     );
 
-    fireEvent.click(screen.getByText("Test Task"));
+    fireEvent.click(screen.getByText("Task 1"));
 
     expect(mockOnClick).toHaveBeenCalledTimes(1);
   });
