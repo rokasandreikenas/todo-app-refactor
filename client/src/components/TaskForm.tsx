@@ -17,9 +17,10 @@ const validationSchema = Yup.object().shape({
 
 interface Props {
   onTaskAdd: (taskName: string) => void;
+  isLoading: boolean;
 }
 
-const TaskForm = ({ onTaskAdd }: Props) => {
+const TaskForm = ({ onTaskAdd, isLoading }: Props) => {
   return (
     <Formik
       initialValues={{ taskName: "" }}
@@ -31,7 +32,9 @@ const TaskForm = ({ onTaskAdd }: Props) => {
     >
       <StyledForm>
         <FormikInput name="taskName" placeholder="Enter task name" />
-        <Button type="submit">Add Task</Button>
+        <Button type="submit" disabled={isLoading}>
+          Add Task
+        </Button>
       </StyledForm>
     </Formik>
   );

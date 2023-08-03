@@ -51,4 +51,13 @@ router.put(
   },
 );
 
+router.delete('/all', async (req, res) => {
+  try {
+    await Task.deleteAll();
+    res.status(200).send('All tasks have been deleted');
+  } catch (error) {
+    errorHandler(res, error);
+  }
+});
+
 module.exports = router;

@@ -1,4 +1,4 @@
-import { createTask, fetchTasks, updateTask } from "../api/task";
+import { createTask, deleteTasks, fetchTasks, updateTask } from "../api/task";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const TASKS = "TASKS";
@@ -21,6 +21,16 @@ export const useUpdateTask = () => {
   const queryClient = useQueryClient();
 
   return useMutation(updateTask, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [TASKS] });
+    },
+  });
+};
+
+export const useDeleteTasks = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(deleteTasks, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [TASKS] });
     },

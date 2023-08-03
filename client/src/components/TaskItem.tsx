@@ -7,6 +7,9 @@ interface Props {
 }
 
 const Active = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
   font-weight: bold;
 `;
 

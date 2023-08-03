@@ -20,6 +20,17 @@ class Task {
     await db.collection('tasks').doc(id).set(task, { merge: true });
     return { id, ...task };
   }
+
+  static async deleteAll() {
+    const snapshot = await db.collection('tasks').get();
+    const batch = db.batch();
+
+    snapshot.docs.forEach((doc) => {
+      batch.delete(doc.ref); // Add delete operation to batch
+    });
+
+    await batch.commit();
+  }
 }
 
 module.exports = Task;
